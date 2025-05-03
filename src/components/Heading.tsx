@@ -1,7 +1,9 @@
 import styles from './Heading.module.css';
 
-export function Heading(props) {
-    const className = styles.heading;
+type HeadingProps = {
+    children: React.ReactNode;
+};
 
-    return <h1 className={className}>{props.children}</h1>;
+export function Heading({ children }: HeadingProps) {
+    return <h1 className={styles.heading}>{children}</h1>;
 }
