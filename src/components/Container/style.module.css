@@ -1,0 +1,10 @@
+.container {
+    display: flex;
+    max-width: 98rem;
+    margin: 0 auto;
+    flex-direction: column;
+}
+
+.content {
+    margin: 3.2rem;
+}
