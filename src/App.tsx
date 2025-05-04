@@ -21,7 +21,12 @@ export function App() {
             <Container>
                 <form action='' className='form'>
                     <div className='formRow'>
-                        <DefaultInput type='text' id='input' />
+                        <DefaultInput
+                            labelText='tarefa'
+                            type='text'
+                            id='input'
+                            placeholder='ex.: estudar matemática'
+                        />
                     </div>
                     <div className='formRow'>
                         <p>Lorem, ipsum.</p>
