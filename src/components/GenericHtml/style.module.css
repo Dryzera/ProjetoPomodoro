@@ -1,0 +1,46 @@
+.container h1 {
+    font-size: 3.2rem;
+    margin-bottom: 1.6rem;
+  }
+  
+  .container h2 {
+    font-size: 2.4rem;
+    margin-bottom: 1.2rem;
+  }
+  
+  .container h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .container p {
+    font-size: 1.6rem;
+    line-height: 1.6;
+    margin-bottom: 1.6rem;
+  }
+  
+  .container a {
+    color: var(--link-color);
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .container a:hover {
+    text-decoration: underline;
+  }
+  
+  .container ul {
+    padding-left: 2.4rem;
+  }
+  
+  .container li {
+    margin-bottom: 0.8rem;
+  }
+  
+  .container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.8rem;
+    display: block;
+    margin: 1.6rem 0;
+  }
