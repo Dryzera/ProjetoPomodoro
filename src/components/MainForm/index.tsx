@@ -33,7 +33,7 @@ export function MainForm() {
             type: 'workTime',
         };
 
-        const secondsRemaining = newTask.duration * 60
+        const secondsRemaining = newTask.duration * 60 // to second
 
         setState(prevState =>  {
             return {
