@@ -6,11 +6,17 @@ import { useRef } from 'react';
 import { toast } from 'react-toastify';
 import { TaskModel } from '../../models/TaskModel';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
+import getNextCycle from '../../utils/getNextCycle';
+import getNextCycleType from '../../utils/getNextCycleType';
 
 export function MainForm() {
-    const {setState} = useTaskContext()
+    const {state, setState} = useTaskContext()
     const taskNameRef = useRef<HTMLInputElement>(null);
-    
+
+    const nextCycle = getNextCycle(state.currentCycle)
+    const nextCycleType = getNextCycleType(nextCycle)
+    const nextCycleDuration = state.config[nextCycleType]
+
     function handleSubmitForm(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
 
@@ -29,8 +35,8 @@ export function MainForm() {
             startDate: Date.now(),
             completeDate: null,
             interruptDate: null,
-            duration: 1,
-            type: 'workTime',
+            duration: nextCycleDuration,
+            type: nextCycleType,
         };
 
         const secondsRemaining = newTask.duration * 60 // to second
@@ -39,7 +45,7 @@ export function MainForm() {
             return {
                 ...prevState,
                 activetTask: newTask,
-                currentCycle: 1,
+                currentCycle: nextCycle,
                 secondsRemaining,
                 formattedSecondsRemaining: '00:00',
                 tasks: [...prevState.tasks, newTask],

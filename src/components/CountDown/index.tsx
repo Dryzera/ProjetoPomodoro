@@ -27,7 +27,8 @@ export function CountDown() {
             };
           });
         }, 1000);
-      
+        
+        document.title = `${state.formattedSecondsRemaining} | Chronos Pomodoro`
         return () => clearInterval(interval);
       }, [state, setState]);
       
