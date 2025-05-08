@@ -15,6 +15,11 @@
     text-align: center;
 }
 
+.input:disabled {
+    color: var(--text-disabled);
+    cursor: not-allowed;
+}
+
 .input:focus {
     outline: none;
     border: 0.2rem solid var(--primary);

@@ -1,7 +1,7 @@
 import { DefaultButton } from '../DefaultButton';
 import { DefaultInput } from '../DefaultInput';
 import { Cycles } from '../Cycles';
-import { PlayCircleIcon } from 'lucide-react';
+import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
 import { useRef } from 'react';
 import { toast } from 'react-toastify';
 import { TaskModel } from '../../models/TaskModel';
@@ -10,24 +10,24 @@ import getNextCycle from '../../utils/getNextCycle';
 import getNextCycleType from '../../utils/getNextCycleType';
 
 export function MainForm() {
-    const {state, setState} = useTaskContext()
+    const { state, setState } = useTaskContext();
     const taskNameRef = useRef<HTMLInputElement>(null);
 
-    const nextCycle = getNextCycle(state.currentCycle)
-    const nextCycleType = getNextCycleType(nextCycle)
-    const nextCycleDuration = state.config[nextCycleType]
+    const nextCycle = getNextCycle(state.currentCycle);
+    const nextCycleType = getNextCycleType(nextCycle);
+    const nextCycleDuration = state.config[nextCycleType];
 
     function handleSubmitForm(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault()
+        e.preventDefault();
 
-        if(!taskNameRef.current) return;
+        if (!taskNameRef.current) return;
 
         const taskName = taskNameRef.current.value.trim();
 
-        if(taskName.length === 0) {
-            toast.warning('Campo tarefa não pode estar vazio.')
+        if (taskName.length === 0) {
+            toast.warning('Campo tarefa não pode estar vazio.');
             return;
-        };
+        }
 
         const newTask: TaskModel = {
             id: Date.now().toString(),
@@ -39,9 +39,9 @@ export function MainForm() {
             type: nextCycleType,
         };
 
-        const secondsRemaining = newTask.duration * 60 // to second
+        const secondsRemaining = newTask.duration * 60; // to second
 
-        setState(prevState =>  {
+        setState(prevState => {
             return {
                 ...prevState,
                 activetTask: newTask,
@@ -49,33 +49,74 @@ export function MainForm() {
                 secondsRemaining,
                 formattedSecondsRemaining: '00:00',
                 tasks: [...prevState.tasks, newTask],
-            }
-        })
+            };
+        });
 
-        toast.info(`Task "${taskName}" iniciada!`)}  
-    
+        toast.info(`Task "${taskName}" iniciada!`);
+    }
+
+    function handleStopTask() {
+        setState(prevState => {
+            return {
+                ...prevState,
+                activetTask: null,
+                secondsRemaining: 0,
+                formattedSecondsRemaining: '00:00',
+                tasks: prevState.tasks.map(task => {
+                    if (
+                        prevState.activetTask &&
+                        prevState.activetTask.id === task.id
+                    ) {
+                        return { ...task, interruptDate: Date.now() };
+                    }
+                    return task;
+                }),
+            };
+        });
+    }
+
     return (
         <form onSubmit={handleSubmitForm} action='' className='form'>
-        <div className='formRow'>
-            <DefaultInput
-                labelText='tarefa'
-                type='text'
-                id='input'
-                placeholder='ex.: estudar matemática'
-                // value={taskNameState}
-                // onChange={e => setTaskNameState(e.target.value)}
-                ref={taskNameRef}
-            />
-        </div>
-        <div className='formRow'>
-            <p>Lorem, ipsum.</p>
-        </div>
-        <div className='formRow'>
-            <Cycles />
-        </div>
-        <div className='formRow'>
-            <DefaultButton icon={<PlayCircleIcon />} />
-        </div>
-    </form>
+            <div className='formRow'>
+                <DefaultInput
+                    labelText='tarefa'
+                    type='text'
+                    id='input'
+                    placeholder='ex.: estudar matemática'
+                    disabled={!!state.activetTask}
+                    autoComplete='false'
+                    // value={taskNameState}
+                    // onChange={e => setTaskNameState(e.target.value)}
+                    ref={taskNameRef}
+                />
+            </div>
+            <div className='formRow'>
+                <p>Lorem, ipsum.</p>
+            </div>
+            <div className='formRow'>
+                <Cycles />
+            </div>
+            <div className='formRow'>
+                {!state.activetTask ? (
+                    <DefaultButton
+                        key='send_task'
+                        aria-label='iniciar nova tarefa'
+                        type='submit'
+                        title='iniciar nova tarefa'
+                        icon={<PlayCircleIcon />}
+                    />
+                ) : (
+                    <DefaultButton
+                        key='stop_task'
+                        aria-label='parar tarefa'
+                        type='button'
+                        title='parar tarefa'
+                        icon={<StopCircleIcon />}
+                        color='red'
+                        onClick={handleStopTask}
+                    />
+                )}
+            </div>
+        </form>
     );
 }
