@@ -8,9 +8,10 @@ import { TaskModel } from '../../models/TaskModel';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import getNextCycle from '../../utils/getNextCycle';
 import getNextCycleType from '../../utils/getNextCycleType';
+import { TaskActionsTypes } from '../../contexts/TaskContext/taskActions';
 
 export function MainForm() {
-    const { state, setState } = useTaskContext();
+    const { state, dispatch } = useTaskContext();
     const taskNameRef = useRef<HTMLInputElement>(null);
 
     const nextCycle = getNextCycle(state.currentCycle);
@@ -39,40 +40,13 @@ export function MainForm() {
             type: nextCycleType,
         };
 
-        const secondsRemaining = newTask.duration * 60; // to second
-
-        setState(prevState => {
-            return {
-                ...prevState,
-                activetTask: newTask,
-                currentCycle: nextCycle,
-                secondsRemaining,
-                formattedSecondsRemaining: '00:00',
-                tasks: [...prevState.tasks, newTask],
-            };
-        });
+        dispatch({ type: TaskActionsTypes.START_TASK, payload: newTask });
 
         toast.info(`Task "${taskName}" iniciada!`);
     }
 
     function handleStopTask() {
-        setState(prevState => {
-            return {
-                ...prevState,
-                activetTask: null,
-                secondsRemaining: 0,
-                formattedSecondsRemaining: '00:00',
-                tasks: prevState.tasks.map(task => {
-                    if (
-                        prevState.activetTask &&
-                        prevState.activetTask.id === task.id
-                    ) {
-                        return { ...task, interruptDate: Date.now() };
-                    }
-                    return task;
-                }),
-            };
-        });
+        dispatch({ type: TaskActionsTypes.INTERRUPT_TAKS });
     }
 
     return (
