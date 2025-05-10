@@ -9,6 +9,7 @@ import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import getNextCycle from '../../utils/getNextCycle';
 import getNextCycleType from '../../utils/getNextCycleType';
 import { TaskActionsTypes } from '../../contexts/TaskContext/taskActions';
+import { Tips } from '../Tips';
 
 export function MainForm() {
     const { state, dispatch } = useTaskContext();
@@ -65,7 +66,7 @@ export function MainForm() {
                 />
             </div>
             <div className='formRow'>
-                <p>Lorem, ipsum.</p>
+                <Tips />
             </div>
             <div className='formRow'>
                 <Cycles />
