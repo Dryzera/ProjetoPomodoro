@@ -3,13 +3,13 @@ import { DefaultInput } from '../DefaultInput';
 import { Cycles } from '../Cycles';
 import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
 import { useRef } from 'react';
-import { toast } from 'react-toastify';
 import { TaskModel } from '../../models/TaskModel';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import getNextCycle from '../../utils/getNextCycle';
 import getNextCycleType from '../../utils/getNextCycleType';
 import { TaskActionsTypes } from '../../contexts/TaskContext/taskActions';
 import { Tips } from '../Tips';
+import { showMessage } from '../../adapters/showMessage';
 
 export function MainForm() {
     const { state, dispatch } = useTaskContext();
@@ -27,7 +27,7 @@ export function MainForm() {
         const taskName = taskNameRef.current.value.trim();
 
         if (taskName.length === 0) {
-            toast.warning('Campo tarefa não pode estar vazio.');
+            showMessage.warning('Campo tarefa não pode estar vazio.');
             return;
         }
 
@@ -43,10 +43,11 @@ export function MainForm() {
 
         dispatch({ type: TaskActionsTypes.START_TASK, payload: newTask });
 
-        toast.info(`Task "${taskName}" iniciada!`);
+        showMessage.info(`Task "${taskName}" iniciada!`);
     }
 
     function handleStopTask() {
+        showMessage.error('Tarefa interrompida');
         dispatch({ type: TaskActionsTypes.INTERRUPT_TAKS });
     }
 
