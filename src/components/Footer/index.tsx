@@ -1,12 +1,12 @@
-import { Link } from 'react-router';
 import styles from './style.module.css';
+import { RouterLink } from '../RouterLink';
 
 export function Footer() {
     return (
         <div className={styles.footer}>
-            <Link className={styles.footerLink} to='/about-pomodoro'>
+            <RouterLink className={styles.footerLink} href='/about-pomodoro'>
                 Entenda mais sobre a técnica de Pomodoro ⏱️📝
-            </Link>
+            </RouterLink>
             <a
                 className={styles.footerLink}
                 href='https://endryus-daniel.vercel.app'
