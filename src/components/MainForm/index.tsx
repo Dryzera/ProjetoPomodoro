@@ -18,6 +18,7 @@ export function MainForm() {
     const nextCycle = getNextCycle(state.currentCycle);
     const nextCycleType = getNextCycleType(nextCycle);
     const nextCycleDuration = state.config[nextCycleType];
+    const lastTaskName = state.tasks[state.tasks.length - 1]?.name || '';
 
     function handleSubmitForm(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -64,6 +65,7 @@ export function MainForm() {
                     // value={taskNameState}
                     // onChange={e => setTaskNameState(e.target.value)}
                     ref={taskNameRef}
+                    defaultValue={lastTaskName}
                 />
             </div>
             <div className='formRow'>
