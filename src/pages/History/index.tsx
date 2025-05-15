@@ -14,6 +14,7 @@ import { TaskActionsTypes } from '../../contexts/TaskContext/taskActions';
 
 export function History() {
     const { state, dispatch } = useTaskContext();
+    const [confirmClearHistory, setConfirmClearHistory] = useState(false);
     const hasTasks = state.tasks.length !== 0;
 
     const taskTypeMap = {
@@ -48,12 +49,26 @@ export function History() {
     }
 
     function handleClearLocalStorage() {
-        if (!confirm('Você deseja apagar todo o histórico?')) return;
+        showMessage.confirm(
+            'Tem certeza que deseja apagar o histórico?',
+            confirmation => {
+                setConfirmClearHistory(confirmation);
+            },
+        );
+    }
+
+    useEffect(() => {
+        if (!confirmClearHistory) return;
 
         localStorage.removeItem('state');
         dispatch({ type: TaskActionsTypes.RESET_STATE });
         showMessage.info('Histórico deletado');
-    }
+        setConfirmClearHistory(false);
+    }, [confirmClearHistory, dispatch]);
+
+    useEffect(() => {
+        showMessage.dismiss();
+    }, []);
 
     useEffect(() => {
         setSortTaskOptions(prevState => ({
