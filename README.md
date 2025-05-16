@@ -1,54 +1,76 @@
-# React + TypeScript + Vite
+# ⏱️ Pomodoro App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Um aplicativo de produtividade que utiliza a técnica Pomodoro para ajudar você a gerenciar melhor seu tempo. Desenvolvido com **React**, **TypeScript** e **Vite**, o app conta com um timer central, páginas informativas e uma seção de configurações de tempo totalmente personalizável.
 
-Currently, two official plugins are available:
+## 🚀 Tecnologias Utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- ⚛️ [React](https://reactjs.org/)
+- 🟦 [TypeScript](https://www.typescriptlang.org/)
+- ⚡ [Vite](https://vitejs.dev/)
+- 🌐 [React Router DOM](https://reactrouter.com/)
 
-## Expanding the ESLint configuration
+## ✨ Funcionalidades
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Timer Pomodoro com ciclos de:
+  - Foco
+  - Descanso curto
+  - Descanso longa
+- Configuração personalizada de tempo para cada ciclo
+- Página de informações sobre a técnica Pomodoro
+- Layout responsivo com CSS puro
+- Navegação entre páginas com React Router
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 🧠 Sobre a Técnica Pomodoro
+
+A técnica Pomodoro consiste em períodos de 25 minutos de trabalho intenso seguidos por 5 minutos de descanso. Após quatro ciclos, é recomendada uma pausa longa de 15 a 30 minutos. Essa técnica ajuda a manter o foco e a evitar a fadiga mental.
+
+## 📁 Estrutura do Projeto
+
+```
+src/
+├── assets/           # Imagens, ícones e recursos estáticos
+├── components/       # Componentes reutilizáveis
+├── context/          # Zustand stores (estados globais)
+├── hooks/            # Hooks personalizados
+├── pages/            # Páginas principais (Timer, Sobre, Configurações)
+├── router/           # Configuração de rotas com React Router
+├── styles/           # Estilos globais e configurações Tailwind
+├── App.tsx           # Componente principal
+├── main.tsx          # Ponto de entrada da aplicação
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🛠️ Instalação
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 1. Clone o repositório
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+git clone https://github.com/Dryzera/ProjetoPomodoro.git
+cd pomodoro-app
 ```
+
+### 2. Instale as dependências
+
+```bash
+npm i
+```
+
+### 3. Inicie o projeto em modo desenvolvimento
+
+```bash
+npm run dev
+```
+
+> O app estará disponível em `http://localhost:5173/`.
+
+## 🧪 Scripts Disponíveis
+
+| Comando            | Descrição                          |
+|--------------------|--------------------------------------|
+| `npm run dev`      | Inicia o servidor de desenvolvimento |
+| `npm run build`    | Gera a build de produção             |
+| `npm run preview`  | Pré-visualiza a build                |
+| `npm run lint`     | Executa o lint com ESLint            |
+
+---
+
+Feito com 💚 por [Endryus Daniel](https://endryus-daniel.vercel.app)
