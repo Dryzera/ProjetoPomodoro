@@ -24,21 +24,6 @@ Um aplicativo de produtividade que utiliza a técnica Pomodoro para ajudar você
 
 A técnica Pomodoro consiste em períodos de 25 minutos de trabalho intenso seguidos por 5 minutos de descanso. Após quatro ciclos, é recomendada uma pausa longa de 15 a 30 minutos. Essa técnica ajuda a manter o foco e a evitar a fadiga mental.
 
-## 📁 Estrutura do Projeto
-
-```
-src/
-├── assets/           # Imagens, ícones e recursos estáticos
-├── components/       # Componentes reutilizáveis
-├── context/          # Zustand stores (estados globais)
-├── hooks/            # Hooks personalizados
-├── pages/            # Páginas principais (Timer, Sobre, Configurações)
-├── router/           # Configuração de rotas com React Router
-├── styles/           # Estilos globais e configurações Tailwind
-├── App.tsx           # Componente principal
-├── main.tsx          # Ponto de entrada da aplicação
-```
-
 ## 🛠️ Instalação
 
 ### 1. Clone o repositório
